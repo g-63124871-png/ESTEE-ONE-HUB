@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MY ESTEE ONE HUB — Portal Pengurusan SK Sepri Tengah</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"/>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif;}
+:root{
+  --navy:#0F3D5C;
+  --navy-deep:#0A2E44;
+  --teal:#1E8A83;
+  --gold:#D8A83E;
+  --paper:#EAF4F3;
+  --card:#FBF7EC;
+  --ink:#1C2B33;
+  --muted:#6B7C85;
+  --line:#E3E9EC;
+  --shadow:0 10px 30px rgba(15,61,92,.08);
+}
+body{background:var(--paper);color:var(--ink);}
+a{text-decoration:none;color:inherit;}
+::-webkit-scrollbar{width:8px;}
+::-webkit-scrollbar-thumb{background:#c6d2d8;border-radius:10px;}
+
+/* ---- Top hero ---- */
+.hero{
+  background:linear-gradient(140deg,var(--navy) 0%,var(--navy-deep) 100%);
+  color:#EAF1F5;padding:34px 6vw 90px;position:relative;overflow:hidden;
+}
+.hero::after{
+  content:"";position:absolute;right:-80px;top:-80px;width:320px;height:320px;
+  border-radius:50%;background:radial-gradient(circle,rgba(216,168,62,.18),transparent 70%);
+}
+.hero-top{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px;position:relative;z-index:2;}
+.brand{display:flex;align-items:center;gap:16px;}
+.brand img{width:64px;height:64px;border-radius:14px;object-fit:cover;background:#fff;}
+.brand .badge{width:64px;height:64px;border-radius:14px;background:var(--gold);display:flex;align-items:center;justify-content:center;font-size:26px;color:var(--navy-deep);}
+.brand h1{font-size:24px;font-weight:800;letter-spacing:.3px;line-height:1.2;}
+.brand span{display:block;font-size:13.5px;color:#9FB8C6;letter-spacing:.5px;margin-top:3px;font-weight:500;}
+.brand .email-tag{font-size:12px;color:var(--gold);display:flex;align-items:center;gap:6px;margin-top:2px;}
+.hero-tag{font-size:12px;color:#9FB8C6;background:rgba(255,255,255,.08);padding:8px 16px;border-radius:20px;border:1px solid rgba(255,255,255,.12);}
+.hero-tag i{color:var(--gold);margin-right:6px;}
+
+.hero-title{position:relative;z-index:2;margin-top:56px;max-width:640px;}
+.hero-title .eyebrow{font-size:12.5px;letter-spacing:2px;color:var(--gold);font-weight:600;text-transform:uppercase;}
+.hero-title h2{font-size:clamp(28px,4vw,42px);font-weight:800;line-height:1.15;margin:10px 0 14px;}
+.hero-title p{font-size:14.5px;color:#C9DAE2;line-height:1.7;}
+
+.hero-search{
+  position:relative;z-index:2;margin-top:26px;background:#fff;border-radius:16px;
+  padding:6px;display:flex;align-items:center;gap:10px;max-width:520px;box-shadow:0 14px 34px rgba(0,0,0,.25);
+}
+.hero-search i{color:var(--muted);margin-left:12px;}
+.hero-search input{border:none;outline:none;flex:1;padding:12px 4px;font-size:14px;color:var(--ink);background:transparent;}
+
+/* ---- Tabs ---- */
+.wrap{max-width:1180px;margin:-46px auto 60px;padding:0 6vw;position:relative;z-index:3;}
+.tabs{
+  display:flex;gap:8px;background:#fff;border-radius:16px;padding:8px;box-shadow:var(--shadow);
+  overflow-x:auto;
+}
+.tab-btn{
+  flex:1;min-width:150px;border:none;background:transparent;padding:14px 12px;border-radius:11px;
+  font-size:13px;font-weight:600;color:var(--muted);cursor:pointer;display:flex;align-items:center;
+  justify-content:center;gap:8px;transition:.2s;white-space:nowrap;
+}
+.tab-btn i{font-size:15px;}
+.tab-btn:hover{background:var(--paper);color:var(--navy);}
+.tab-btn.active{background:var(--navy);color:#fff;}
+
+.panel{display:none;margin-top:28px;animation:fade .25s ease;}
+.panel.active{display:block;}
+@keyframes fade{from{opacity:0;transform:translateY(6px);}to{opacity:1;transform:translateY(0);}}
+
+.panel-head{display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:10px;margin-bottom:18px;}
+.panel-head h3{font-size:20px;font-weight:700;color:var(--navy);}
+.panel-head p{font-size:12.5px;color:var(--muted);margin-top:4px;}
+.panel-count{font-size:11.5px;background:var(--card);border:1px solid var(--line);color:var(--muted);padding:5px 12px;border-radius:20px;}
+
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:16px;}
+.link-card{
+  background:var(--card);border-radius:16px;padding:20px;border:1px solid var(--line);
+  box-shadow:var(--shadow);display:flex;flex-direction:column;gap:12px;transition:.2s;position:relative;
+}
+.link-card:hover{transform:translateY(-4px);box-shadow:0 14px 34px rgba(15,61,92,.14);}
+.link-card .icon{width:44px;height:44px;border-radius:11px;display:flex;align-items:center;justify-content:center;font-size:18px;color:#fff;}
+.link-card h4{font-size:14.5px;font-weight:600;line-height:1.3;}
+.link-card p{font-size:12px;color:var(--muted);line-height:1.5;flex:1;}
+.link-card .go{
+  font-size:12px;font-weight:600;color:var(--navy);display:flex;align-items:center;gap:6px;
+}
+.link-card .go i{font-size:11px;transition:.2s;}
+.link-card:hover .go i{transform:translateX(3px);}
+.link-card.soon{opacity:.6;}
+.link-card.soon .go{color:var(--muted);}
+.tag-soon{position:absolute;top:16px;right:16px;font-size:9.5px;background:var(--line);color:var(--muted);padding:3px 8px;border-radius:20px;font-weight:600;letter-spacing:.4px;}
+
+/* icon colors per category */
+.ic-pentadbiran{background:var(--navy);}
+.ic-kurikulum{background:var(--teal);}
+.ic-hem{background:#C4463A;}
+.ic-koku{background:var(--gold);}
+
+.footer{text-align:center;color:var(--muted);padding:10px 0 40px;font-size:12px;}
+
+/* ---- Login gate ---- */
+#loginGate{
+  position:fixed;inset:0;z-index:999;display:flex;align-items:center;justify-content:center;
+  background:linear-gradient(140deg,var(--navy) 0%,var(--navy-deep) 100%);padding:20px;
+}
+.login-card{
+  background:#fff;border-radius:20px;padding:40px 34px;width:100%;max-width:380px;
+  box-shadow:0 20px 60px rgba(0,0,0,.35);text-align:center;
+}
+.login-card .badge-lg{
+  width:64px;height:64px;border-radius:14px;background:#fff;border:1.5px solid var(--line);
+  display:flex;align-items:center;justify-content:center;font-size:24px;color:var(--navy);
+  margin:0 auto 16px;object-fit:contain;padding:6px;
+}
+.login-card h2{font-size:18px;font-weight:700;color:var(--navy);margin-bottom:4px;}
+.login-card p{font-size:12px;color:var(--muted);margin-bottom:22px;}
+.login-field{text-align:left;margin-bottom:14px;}
+.login-field label{font-size:11.5px;font-weight:600;color:var(--navy);display:block;margin-bottom:6px;letter-spacing:.3px;}
+.login-field input{
+  width:100%;padding:12px 14px;border:1.5px solid var(--line);border-radius:10px;font-size:14px;
+  outline:none;transition:.2s;background:var(--paper);color:var(--ink);
+}
+.login-field input:focus{border-color:var(--teal);background:#fff;}
+.login-btn{
+  width:100%;padding:13px;border:none;border-radius:10px;background:var(--navy);color:#fff;
+  font-size:14px;font-weight:600;cursor:pointer;margin-top:6px;transition:.2s;letter-spacing:.3px;
+}
+.login-btn:hover{background:var(--navy-deep);}
+.login-btn:disabled{opacity:.6;cursor:not-allowed;}
+.login-error{
+  font-size:12px;color:#C4463A;background:#FBEAE8;border:1px solid #F1C7C1;border-radius:8px;
+  padding:9px 12px;margin-bottom:14px;display:none;text-align:left;
+}
+.login-error.show{display:block;}
+.login-foot{font-size:11px;color:var(--muted);margin-top:18px;line-height:1.6;}
+
+#appShell{display:none;}
+.user-bar{
+  display:flex;align-items:center;gap:10px;font-size:12px;color:#C9DAE2;
+}
+.user-bar .role-pill{
+  font-size:10.5px;font-weight:700;letter-spacing:.4px;background:rgba(216,168,62,.18);
+  color:var(--gold);padding:4px 10px;border-radius:20px;border:1px solid rgba(216,168,62,.35);
+}
+.user-bar button{
+  background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);color:#EAF1F5;
+  font-size:11.5px;padding:6px 12px;border-radius:8px;cursor:pointer;font-weight:600;
+}
+.user-bar button:hover{background:rgba(255,255,255,.18);}
+
+@media(max-width:640px){
+  .tab-btn{min-width:120px;font-size:12px;padding:12px 8px;}
+  .hero{padding:26px 5vw 80px;}
+}
+</style>
+</head>
+<body>
+
+<div id="loginGate">
+  <div class="login-card">
+    <img class="badge-lg" src="https://drive.google.com/thumbnail?id=1vAPuDgYIem7NzmYh2-CHL_yyyT1g4X9f&sz=w200" alt="Logo SKST"
+         onerror="this.outerHTML='<div class=&quot;badge-lg&quot;><i class=&quot;fa-solid fa-school&quot;></i></div>'">
+    <h2>MY ESTEE ONE HUB</h2>
+    <p>Log masuk untuk akses portal · SK Sepri Tengah</p>
+    <div class="login-error" id="loginError"></div>
+    <form id="loginForm" autocomplete="off">
+      <div class="login-field">
+        <label for="loginId">No. Log Masuk (Kad Pengenalan)</label>
+        <input type="text" id="loginId" inputmode="numeric" placeholder="Contoh: 820610045091" required>
+      </div>
+      <div class="login-field">
+        <label for="loginPw">Kata Laluan</label>
+        <input type="password" id="loginPw" placeholder="4 digit terakhir" required>
+      </div>
+      <button type="submit" class="login-btn" id="loginBtn">Log Masuk</button>
+    </form>
+    <div class="login-foot">Akses terhad kepada staf berdaftar SK Sepri Tengah sahaja.<br>Hubungi pentadbir sistem jika menghadapi masalah log masuk.</div>
+  </div>
+</div>
+
+<div id="appShell">
+<div class="hero">
+  <div class="hero-top">
+    <div class="brand">
+      <img src="https://drive.google.com/thumbnail?id=1vAPuDgYIem7NzmYh2-CHL_yyyT1g4X9f&sz=w200"
+           onerror="this.outerHTML='<div class=&quot;badge&quot;><i class=&quot;fa-solid fa-school&quot;></i></div>'">
+      <div>
+        <h1>MY ESTEE ONE HUB</h1>
+        <span>SK SEPRI TENGAH · NBA0006</span>
+        <div class="email-tag"><i class="fa-solid fa-envelope"></i> nba0006@moe.edu.my</div>
+      </div>
+    </div>
+    <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;">
+      <div class="hero-tag"><i class="fa-solid fa-circle-check"></i>Portal Pengurusan Bersepadu — Tahun 2026</div>
+      <div class="user-bar">
+        <span>Log masuk sebagai <strong id="userNameTag"></strong></span>
+        <span class="role-pill" id="userRoleTag"></span>
+        <button id="logoutBtn"><i class="fa-solid fa-right-from-bracket"></i> Log Keluar</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="hero-title">
+    <div class="eyebrow">Satu Pautan, Semua Sistem</div>
+    <h2>Pusat Pengurusan All-in-One SK Sepri Tengah</h2>
+    <p>Akses semua sistem, borang dan pangkalan data sekolah mengikut bidang: Pentadbiran, Kurikulum, Hal Ehwal Murid dan Kokurikulum — semuanya dalam satu portal.</p>
+  </div>
+
+  <div class="hero-search">
+    <i class="fa-solid fa-search"></i>
+    <input id="searchBox" type="text" placeholder="Cari sistem, borang atau pautan...">
+  </div>
+</div>
+
+<div class="wrap">
+
+  <div class="tabs" id="tabBar">
+    <button class="tab-btn active" data-tab="pentadbiran"><i class="fa-solid fa-building-columns"></i> Pentadbiran</button>
+    <button class="tab-btn" data-tab="kurikulum"><i class="fa-solid fa-book-open"></i> Kurikulum</button>
+    <button class="tab-btn" data-tab="hem"><i class="fa-solid fa-user-graduate"></i> Hal Ehwal Murid</button>
+    <button class="tab-btn" data-tab="koku"><i class="fa-solid fa-futbol"></i> Kokurikulum</button>
+  </div>
+
+  <!-- PENTADBIRAN -->
+  <div class="panel active" id="panel-pentadbiran">
+    <div class="panel-head">
+      <div>
+        <h3>Pengurusan Pentadbiran</h3>
+        <p>Borang rasmi, pangkalan data staf dan urusan pejabat</p>
+      </div>
+      <span class="panel-count" id="count-pentadbiran"></span>
+    </div>
+    <div class="grid" id="grid-pentadbiran"></div>
+  </div>
+
+  <!-- KURIKULUM -->
+  <div class="panel" id="panel-kurikulum">
+    <div class="panel-head">
+      <div>
+        <h3>Pengurusan Kurikulum</h3>
+        <p>Panitia mata pelajaran, takwim akademik dan analisis prestasi</p>
+      </div>
+      <span class="panel-count" id="count-kurikulum"></span>
+    </div>
+    <div class="grid" id="grid-kurikulum"></div>
+  </div>
+
+  <!-- HEM -->
+  <div class="panel" id="panel-hem">
+    <div class="panel-head">
+      <div>
+        <h3>Hal Ehwal Murid</h3>
+        <p>Surat kebenaran, rawatan, disiplin dan kebajikan murid</p>
+      </div>
+      <span class="panel-count" id="count-hem"></span>
+    </div>
+    <div class="grid" id="grid-hem"></div>
+  </div>
+
+  <!-- KOKURIKULUM -->
+  <div class="panel" id="panel-koku">
+    <div class="panel-head">
+      <div>
+        <h3>Kokurikulum</h3>
+        <p>Kelab, persatuan, sukan permainan dan badan beruniform</p>
+      </div>
+      <span class="panel-count" id="count-koku"></span>
+    </div>
+    <div class="grid" id="grid-koku"></div>
+  </div>
+
+  <div class="footer">MY ESTEE ONE HUB · SK Sepri Tengah (NBA0006) · Kuala Klawang, Jelebu, Negeri Sembilan · 2026</div>
+</div>
+</div><!-- /appShell -->
+
+<script>
+/* ============================================================
+   PENGESAHAN PENGGUNA (Client-side gate)
+   Kata laluan disimpan sebagai SHA-256(no.login:kata laluan)
+   supaya nombor asal tidak terus kelihatan dalam kod sumber.
+   ============================================================ */
+const USERS = [
+  {name:"ABDUL RAHIM BIN ABDULLAH", hash:"2124706336b604f7bc0f0752b959e1486bf79d2cbd179d9ac11695a26b71a39c", role:"ADMIN"},
+  {name:"MOHD RIZAI BIN SARITI", hash:"c32fd10f6a046c786bfabb6f0ba513fc11fee7efaae1d43797cda74708be9182", role:"ADMIN"},
+  {name:"SALAHUDDIN BIN MOHD SALLEH", hash:"ac0e5e272aa02fcba9c7904523c1d03e60c5543f927d05ae9c2684bda5b588d6", role:"USER"},
+  {name:"AHMED HISYAM BIN JUSOH", hash:"73e764c8a9d428aabc85e7ac90715d5d36a68048773e6b306ef9ea1b11a787ca", role:"USER"},
+  {name:"AHMAD HASRIN BIN OTHMAN", hash:"07ca03c20657e63441c648ccfaf60e13f80473ea9241e07ad3d33e5c4955fe76", role:"USER"},
+  {name:"AZURA BINTI ADAM", hash:"c948d4d2358769f745c53646273d7285ebb95f39a1882edea705066976d520fa", role:"USER"},
+  {name:"MD. RASID BIN ZAMANI", hash:"72e32eeafd98c70f3e69667aa6b18f2550fa928b92a9ea57ebbb2f64e7974397", role:"USER"},
+  {name:"MOHD AIZIL BIN MD. DERUS", hash:"ca626cfea7a2a0a222124fdd544d4d5208380f5f94a3f093ca882ac98f2dc52d", role:"USER"},
+  {name:"NOOR AFIZAH BINTI RUSLAN", hash:"65d83f8318059d954c04cc51735a1b3aece3e59a38b595ee82e48d2767c482ef", role:"USER"},
+  {name:"SITI FARHANA SOFEA BINTI MOHD ZAMRI", hash:"aedb5cb2f4a1caf9689c632b584afe6d17ff90154853ace75628f60b52eae777", role:"USER"},
+  {name:"UMIMARLIA BINTI JAMIL", hash:"92cdbdaf88f37d9f925675ac7296c02d3f76ddacd2df802425845b6572ab15f2", role:"USER"},
+  {name:"NORHAIZAH BINTI ABDULLAH", hash:"273b8f77a6c60bd2e155ca4b0fa7074a3df2a339e2d682ac44b5233c99d59a82", role:"USER"},
+  {name:"NURUL FAREHAH BINTI ABD. GHAFFAR", hash:"69527cc08c88bc3611cd64a3fb5662a3e9a7ae0568ae4b5132129cfce0cdae07", role:"USER"},
+  {name:"NURSHAFIKA NADIRA BINTI NAZRI", hash:"cbd7a8f94049acfd4159f6e6a4e57f4b8e6cde1cdbdb07608b9a5921b7416bfa", role:"USER"},
+  {name:"FATIN NURSYAKIRAH BINTI NORDIN", hash:"bf12eed3c85832f7c64df9d58a59bd342f8a33599cc80cf50be0d9ab99ee5ebe", role:"USER"},
+  {name:"JAZMI BIN MOHD MANZOR", hash:"a98fdb2f29e375651672a31c9c09fa695eca9ba522e8c8bd4efde5c533517983", role:"USER"},
+  {name:"MAZLAN BIN ZAKARIA", hash:"aa54819cf608ea903804dc48f8abf66f3a31d903ceede4adc5933efb7d9c7e11", role:"USER"},
+  {name:"NURFARINA AZWIN BINTI NORLAMIN", hash:"3e9049bbe9c5f0ca050c34477cc740c8ce14ab6103e3a131a5cdf1e6e09f27ba", role:"USER"},
+];
+
+async function sha256(text){
+  const buf = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(text));
+  return Array.from(new Uint8Array(buf)).map(b=>b.toString(16).padStart(2,"0")).join("");
+}
+
+const SESSION_KEY = "myEsteeOneHub_session";
+const MAX_ATTEMPTS = 5;
+const LOCK_MS = 60000; // 1 minit
+let attemptCount = Number(sessionStorage.getItem("loginAttempts") || 0);
+let lockUntil = Number(sessionStorage.getItem("loginLockUntil") || 0);
+
+function showLoginError(msg){
+  const el = document.getElementById("loginError");
+  el.textContent = msg;
+  el.classList.add("show");
+}
+function hideLoginError(){
+  document.getElementById("loginError").classList.remove("show");
+}
+
+function enterApp(session){
+  document.getElementById("loginGate").style.display = "none";
+  document.getElementById("appShell").style.display = "block";
+  document.getElementById("userNameTag").textContent = session.name;
+  document.getElementById("userRoleTag").textContent = session.role;
+}
+
+(function checkExistingSession(){
+  try{
+    const raw = sessionStorage.getItem(SESSION_KEY);
+    if(raw){
+      const session = JSON.parse(raw);
+      if(session && session.name) enterApp(session);
+    }
+  }catch(e){}
+})();
+
+document.getElementById("loginForm").addEventListener("submit", async function(e){
+  e.preventDefault();
+  hideLoginError();
+
+  const now = Date.now();
+  if(now < lockUntil){
+    const secs = Math.ceil((lockUntil - now)/1000);
+    showLoginError(`Terlalu banyak percubaan gagal. Sila cuba lagi dalam ${secs} saat.`);
+    return;
+  }
+
+  const idVal = document.getElementById("loginId").value.trim();
+  const pwVal = document.getElementById("loginPw").value.trim();
+  if(!idVal || !pwVal){
+    showLoginError("Sila isi No. Log Masuk dan Kata Laluan.");
+    return;
+  }
+
+  const btn = document.getElementById("loginBtn");
+  btn.disabled = true;
+  btn.textContent = "Menyemak...";
+
+  const hash = await sha256(idVal + ":" + pwVal);
+  const match = USERS.find(u => u.hash === hash);
+
+  btn.disabled = false;
+  btn.textContent = "Log Masuk";
+
+  if(match){
+    attemptCount = 0;
+    sessionStorage.setItem("loginAttempts", "0");
+    const session = {name: match.name, role: match.role, ts: Date.now()};
+    sessionStorage.setItem(SESSION_KEY, JSON.stringify(session));
+    enterApp(session);
+  } else {
+    attemptCount++;
+    sessionStorage.setItem("loginAttempts", String(attemptCount));
+    if(attemptCount >= MAX_ATTEMPTS){
+      lockUntil = Date.now() + LOCK_MS;
+      sessionStorage.setItem("loginLockUntil", String(lockUntil));
+      showLoginError("Terlalu banyak percubaan gagal. Akaun dikunci sementara selama 1 minit.");
+    } else {
+      showLoginError(`No. Log Masuk atau Kata Laluan salah. (${MAX_ATTEMPTS - attemptCount} percubaan lagi)`);
+    }
+  }
+});
+
+document.getElementById("logoutBtn").addEventListener("click", function(){
+  sessionStorage.removeItem(SESSION_KEY);
+  document.getElementById("loginForm").reset();
+  document.getElementById("appShell").style.display = "none";
+  document.getElementById("loginGate").style.display = "flex";
+});
+
+const DATA = {
+  pentadbiran: [
+    {icon:"fa-solid fa-folder-tree", cls:"ic-pentadbiran", title:"Drive Induk Sekolah", desc:"Fail rasmi, surat rasmi dan dokumen pentadbiran sekolah.", href:"https://drive.google.com/drive/folders/1rdZVR67nJefkhffrW2Zy4v49Qt7g4S5m?usp=drive_link", soon:false},
+    {icon:"fa-solid fa-calendar-days", cls:"ic-pentadbiran", title:"Takwim Sekolah", desc:"Jadual aktiviti rasmi sekolah sepanjang tahun.", href:"https://docs.google.com/spreadsheets/d/1wBSbk8lKBQf7IuR-KPAxpIkvz6O5cuKF/edit?usp=sharing&ouid=107886285214723373831&rtpof=true&sd=true", soon:false},
+    {icon:"fa-solid fa-layer-group", cls:"ic-pentadbiran", title:"SK@S", desc:"Sistem/fail berkaitan pentadbiran sekolah.", href:"https://drive.google.com/drive/folders/1BNB4lvzIdrdx-3WfSlhP8_TiKUPkCOlc?usp=sharing", soon:false},
+    {icon:"fa-solid fa-briefcase-medical", cls:"ic-pentadbiran", title:"Surat Rawatan Murid", desc:"Surat kebenaran rawatan murid semasa waktu persekolahan.", href:"https://g-63124871-png.github.io/SURATRAWATAN/", soon:false},
+    {icon:"fa-solid fa-child-reaching", cls:"ic-pentadbiran", title:"Surat Kebenaran Keluar Murid", desc:"Surat kebenaran murid keluar sekolah dengan cetakan automatik.", href:"https://g-63124871-png.github.io/KEBENARANKELUAR/", soon:false},
+    {icon:"fa-solid fa-door-open", cls:"ic-pentadbiran", title:"Surat Kebenaran Keluar Guru & AKP", desc:"Permohonan kebenaran meninggalkan pejabat dalam waktu bekerja.", href:"https://g-63124871-png.github.io/KEBENARANKELUAR/", soon:false},
+  ],
+  kurikulum: [
+    {icon:"fa-solid fa-folder-tree", cls:"ic-kurikulum", title:"Drive Induk Kurikulum", desc:"Fail dan dokumen pusat berkaitan kurikulum sekolah.", href:"https://drive.google.com/drive/folders/15Zi4ctPuQvJcktzzguyfsfaEkNEr6cm8?usp=drive_link", soon:false},
+    {icon:"fa-solid fa-chalkboard-user", cls:"ic-kurikulum", title:"PanitiaHub", desc:"Akses folder & dokumen semua panitia mata pelajaran.", href:"https://g-63124871-png.github.io/PANITIAHUBSKST/", soon:false},
+    {icon:"fa-solid fa-clipboard-check", cls:"ic-kurikulum", title:"Pencerapan", desc:"Borang pencerapan pengajaran & pembelajaran guru.", href:"https://g-63124871-png.github.io/BORANGPENCERAPAN-/", soon:false},
+    {icon:"fa-solid fa-chart-line", cls:"ic-kurikulum", title:"Rekod Perkembangan Murid", desc:"Rekod dan pemantauan perkembangan akademik murid.", href:"https://script.google.com/a/macros/moe-dl.edu.my/s/AKfycbxecju_IAAYkJSTEX5dWX8LU5qFIkzyd7544jOKdE03Srn8xLyvLS7hZ10tf6yQc5ol/exec", soon:false},
+    {icon:"fa-solid fa-file-pen", cls:"ic-kurikulum", title:"Pentaksiran Pertengahan Tahun", desc:"Pentaksiran dan penilaian pertengahan tahun murid.", href:"https://tinyurl.com/4fahuc38", soon:false},
+  ],
+  hem: [
+    {icon:"fa-solid fa-folder-tree", cls:"ic-hem", title:"Drive Induk Hal Ehwal Murid", desc:"Fail dan dokumen pusat berkaitan Hal Ehwal Murid.", href:"https://mylink.la/hem_skst", soon:false},
+  ],
+  koku: [
+    {icon:"fa-solid fa-folder-tree", cls:"ic-koku", title:"Drive Induk Kokurikulum", desc:"Fail dan dokumen pusat berkaitan kokurikulum sekolah.", href:"https://drive.google.com/drive/folders/11sb5HTABT-z9bZlOiIpQE4LgQ8C8hDKM?usp=drive_link", soon:false},
+  ]
+};
+
+function renderGrid(key){
+  const grid = document.getElementById("grid-"+key);
+  const count = document.getElementById("count-"+key);
+  grid.innerHTML = "";
+  count.textContent = DATA[key].length + " item";
+  DATA[key].forEach(item=>{
+    const card = document.createElement(item.soon ? "div" : "a");
+    if(!item.soon){ card.href = item.href; card.target = "_blank"; }
+    card.className = "link-card" + (item.soon ? " soon" : "");
+    card.innerHTML = `
+      ${item.soon ? '<span class="tag-soon">AKAN DATANG</span>' : ''}
+      <div class="icon ${item.cls}"><i class="${item.icon}"></i></div>
+      <h4>${item.title}</h4>
+      <p>${item.desc}</p>
+      <div class="go">${item.soon ? 'Belum tersedia' : 'Buka sistem'} <i class="fa-solid fa-arrow-right"></i></div>
+    `;
+    grid.appendChild(card);
+  });
+}
+Object.keys(DATA).forEach(renderGrid);
+
+document.querySelectorAll(".tab-btn").forEach(btn=>{
+  btn.addEventListener("click", ()=>{
+    document.querySelectorAll(".tab-btn").forEach(b=>b.classList.remove("active"));
+    document.querySelectorAll(".panel").forEach(p=>p.classList.remove("active"));
+    btn.classList.add("active");
+    document.getElementById("panel-"+btn.dataset.tab).classList.add("active");
+  });
+});
+
+document.getElementById("searchBox").addEventListener("keyup", function(){
+  const v = this.value.toLowerCase();
+  if(v){
+    document.querySelectorAll(".panel").forEach(p=>p.classList.add("active"));
+  } else {
+    document.querySelectorAll(".panel").forEach((p,i)=>p.classList.toggle("active", i===0));
+    document.querySelectorAll(".tab-btn").forEach((b,i)=>b.classList.toggle("active", i===0));
+  }
+  document.querySelectorAll(".link-card").forEach(c=>{
+    c.style.display = c.innerText.toLowerCase().includes(v) ? "" : "none";
+  });
+});
+</script>
+
+</body>
+</html>
