@@ -97,6 +97,7 @@ a{text-decoration:none;color:inherit;}
 .link-card.soon{opacity:.6;}
 .link-card.soon .go{color:var(--muted);}
 .tag-soon{position:absolute;top:16px;right:16px;font-size:9.5px;background:var(--line);color:var(--muted);padding:3px 8px;border-radius:20px;font-weight:600;letter-spacing:.4px;}
+.tag-new{position:absolute;top:16px;right:16px;font-size:9.5px;background:var(--gold);color:var(--navy-deep);padding:3px 8px;border-radius:20px;font-weight:700;letter-spacing:.4px;}
 
 /* icon colors per category */
 .ic-pentadbiran{background:var(--navy);}
@@ -403,6 +404,7 @@ const DATA = {
   pentadbiran: [
     {icon:"fa-solid fa-folder-tree", cls:"ic-pentadbiran", title:"Drive Induk Sekolah", desc:"Fail rasmi, surat rasmi dan dokumen pentadbiran sekolah.", href:"https://drive.google.com/drive/folders/1rdZVR67nJefkhffrW2Zy4v49Qt7g4S5m?usp=drive_link", soon:false},
     {icon:"fa-solid fa-calendar-days", cls:"ic-pentadbiran", title:"Takwim Sekolah", desc:"Jadual aktiviti rasmi sekolah sepanjang tahun.", href:"https://docs.google.com/spreadsheets/d/1wBSbk8lKBQf7IuR-KPAxpIkvz6O5cuKF/edit?usp=sharing&ouid=107886285214723373831&rtpof=true&sd=true", soon:false},
+    {icon:"fa-solid fa-calendar-check", cls:"ic-pentadbiran", title:"Takwim Persekolahan 2027", desc:"Takwim digital sekolah: lihat aktiviti dan cuti, guru boleh tambah aktiviti secara bundle.", href:"https://script.google.com/macros/s/AKfycbytpINKKf6w0ATvF0-hxJ-W5PMSGOpajVUn1KkcWyZxe7EvwHe54Li6e_ZykRru1ouo/exec", soon:false, isNew:true},
     {icon:"fa-solid fa-layer-group", cls:"ic-pentadbiran", title:"SK@S", desc:"Sistem/fail berkaitan pentadbiran sekolah.", href:"https://drive.google.com/drive/folders/1BNB4lvzIdrdx-3WfSlhP8_TiKUPkCOlc?usp=sharing", soon:false},
     {icon:"fa-solid fa-briefcase-medical", cls:"ic-pentadbiran", title:"Surat Rawatan Murid", desc:"Surat kebenaran rawatan murid semasa waktu persekolahan.", href:"https://g-63124871-png.github.io/SURATRAWATAN/", soon:false},
     {icon:"fa-solid fa-child-reaching", cls:"ic-pentadbiran", title:"Surat Kebenaran Keluar Murid", desc:"Surat kebenaran murid keluar sekolah dengan cetakan automatik.", href:"https://g-63124871-png.github.io/SURATKELUARMURID/", soon:false},
@@ -431,10 +433,10 @@ function renderGrid(key){
   count.textContent = DATA[key].length + " item";
   DATA[key].forEach(item=>{
     const card = document.createElement(item.soon ? "div" : "a");
-    if(!item.soon){ card.href = item.href; card.target = "_blank"; }
+    if(!item.soon){ card.href = item.href; card.target = "_blank"; card.rel = "noopener"; }
     card.className = "link-card" + (item.soon ? " soon" : "");
     card.innerHTML = `
-      ${item.soon ? '<span class="tag-soon">AKAN DATANG</span>' : ''}
+      ${item.soon ? '<span class="tag-soon">AKAN DATANG</span>' : (item.isNew ? '<span class="tag-new">BARU</span>' : '')}
       <div class="icon ${item.cls}"><i class="${item.icon}"></i></div>
       <h4>${item.title}</h4>
       <p>${item.desc}</p>
